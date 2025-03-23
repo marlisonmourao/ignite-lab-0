@@ -1,10 +1,13 @@
 import { DatabaseModule } from '@/database/database.module'
-import { TestResolver } from '@/http/test/test.resolver'
+import { ProductsResolvers } from '@/http/graphql/resolvers/products.resolver'
+import { ProductsServices } from '@/services/products.service'
+import { PurchasesServices } from '@/services/purchases.service'
 import { ApolloDriver } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import path from 'node:path'
+import { PurchasesResolvers } from './graphql/resolvers/purchases.resolver'
 
 @Module({
   imports: [
@@ -16,6 +19,12 @@ import path from 'node:path'
       context: ({ req, res }) => ({ request: req, response: res }),
     }),
   ],
-  providers: [TestResolver],
+  providers: [
+    ProductsServices,
+    PurchasesServices,
+
+    ProductsResolvers,
+    PurchasesResolvers,
+  ],
 })
 export class HttpModule {}
