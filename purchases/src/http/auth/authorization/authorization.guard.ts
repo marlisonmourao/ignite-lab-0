@@ -4,7 +4,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common'
-import type { ConfigService } from '@nestjs/config'
+import { ConfigService } from '@nestjs/config'
 import { auth } from 'express-oauth2-jwt-bearer'
 
 @Injectable()
@@ -27,12 +27,13 @@ export class AuthorizationGuard implements CanActivate {
       tokenSigningAlg: 'RS256',
     })
 
-    try {
-      checkJWT(request, response, () => {})
-
-      return true
-    } catch (error) {
-      throw new UnauthorizedException(error)
-    }
+    return new Promise((resolve, reject) => {
+      checkJWT(request, response, err => {
+        if (err) {
+          return reject(new UnauthorizedException(err))
+        }
+        resolve(true)
+      })
+    })
   }
 }

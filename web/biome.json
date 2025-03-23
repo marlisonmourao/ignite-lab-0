@@ -19,14 +19,24 @@
   },
   "linter": {
     "enabled": true,
+
     "rules": {
       "recommended": true,
+      "suspicious": {
+        "noArrayIndexKey": "off"
+      },
       "style": {
         "useImportType": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      },
+      "complexity": {
+        "noUselessCatch": "off"
       }
     }
   },
   "files": {
-    "ignore": ["node_modules", "build"]
+    "ignore": ["node_modules"]
   }
 }
