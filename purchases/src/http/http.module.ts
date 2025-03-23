@@ -8,6 +8,7 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import path from 'node:path'
+import { CustomersResolvers } from './graphql/resolvers/customers.resolver'
 import { PurchasesResolvers } from './graphql/resolvers/purchases.resolver'
 
 @Module({
@@ -28,6 +29,7 @@ import { PurchasesResolvers } from './graphql/resolvers/purchases.resolver'
     PurchasesResolvers,
 
     CustomersServices,
+    CustomersResolvers,
   ],
 })
 export class HttpModule {}
