@@ -1,9 +1,9 @@
-// {
-//   "[typescript]": {
-//     "editor.formatOnSave": true,
-//     "editor.defaultFormatter": "biomejs.biome",
-//   },
-//   "[prisma]": {
-//     "editor.formatOnSave": true,
-//   }
-// }
+{
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "biomejs.biome",
+  },
+  "[prisma]": {
+    "editor.formatOnSave": true,
+  }
+}
