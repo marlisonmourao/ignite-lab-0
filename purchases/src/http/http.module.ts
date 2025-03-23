@@ -1,5 +1,6 @@
 import { DatabaseModule } from '@/database/database.module'
 import { ProductsResolvers } from '@/http/graphql/resolvers/products.resolver'
+import { CustomersServices } from '@/services/customers.service'
 import { ProductsServices } from '@/services/products.service'
 import { PurchasesServices } from '@/services/purchases.service'
 import { ApolloDriver } from '@nestjs/apollo'
@@ -25,6 +26,8 @@ import { PurchasesResolvers } from './graphql/resolvers/purchases.resolver'
 
     ProductsResolvers,
     PurchasesResolvers,
+
+    CustomersServices,
   ],
 })
 export class HttpModule {}
