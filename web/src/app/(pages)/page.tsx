@@ -3,6 +3,8 @@ import { getSession } from '@auth0/nextjs-auth0'
 export default async function Home() {
   const user = await getSession()
 
+  console.log(user)
+
   return (
     <div className="flex-1">
       <h1 className="text-6xl">hello World</h1>
