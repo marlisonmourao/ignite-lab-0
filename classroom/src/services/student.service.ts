@@ -9,6 +9,14 @@ export class StudentServices {
     return await this.prisma.student.findMany()
   }
 
+  async getStudentByUserId(authUserId: string) {
+    return await this.prisma.student.findUnique({
+      where: {
+        authUserId,
+      },
+    })
+  }
+
   async getStudentById(id: string) {
     return await this.prisma.student.findUnique({
       where: {

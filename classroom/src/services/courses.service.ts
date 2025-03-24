@@ -1,5 +1,10 @@
 import { PrismaService } from '@/database/prisma/prisma.service'
+import { generateSlug } from '@/utils/generate-slug'
 import { Injectable } from '@nestjs/common'
+
+interface CreateCourseParams {
+  title: string
+}
 
 @Injectable()
 export class CoursesServices {
@@ -13,6 +18,27 @@ export class CoursesServices {
     return await this.prisma.course.findUnique({
       where: {
         id,
+      },
+    })
+  }
+
+  async createCourse({ title }: CreateCourseParams) {
+    const slug = generateSlug(title)
+
+    const courseAlreadyExists = await this.prisma.course.findUnique({
+      where: {
+        slug,
+      },
+    })
+
+    if (courseAlreadyExists) {
+      throw new Error('Course already exists')
+    }
+
+    return await this.prisma.course.create({
+      data: {
+        title,
+        slug,
       },
     })
   }
