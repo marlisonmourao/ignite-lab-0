@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common'
 
 interface CreateCourseParams {
   title: string
+  slug?: string
 }
 
 @Injectable()
@@ -22,12 +23,12 @@ export class CoursesServices {
     })
   }
 
-  async createCourse({ title }: CreateCourseParams) {
-    const slug = generateSlug(title)
+  async createCourse({ title, slug }: CreateCourseParams) {
+    const courseSlug = slug ?? generateSlug(title)
 
     const courseAlreadyExists = await this.prisma.course.findUnique({
       where: {
-        slug,
+        slug: courseSlug,
       },
     })
 
@@ -38,6 +39,14 @@ export class CoursesServices {
     return await this.prisma.course.create({
       data: {
         title,
+        slug,
+      },
+    })
+  }
+
+  async getStudentBySlug(slug: string) {
+    return await this.prisma.course.findUnique({
+      where: {
         slug,
       },
     })
